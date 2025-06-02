@@ -1,0 +1,42 @@
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Лог-файлы
+*.log
+*.out
+*.err
+
+# Кэш Flask и временные файлы
+instance/
+*.sqlite3
+*.db
+*.pkl
+*.pyc
+
+# Локальные настройки и переменные окружения
+.env
+*.env
+.env.*
+
+# Файлы virtualenv
+venv/
+ENV/
+env/
+.venv/
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Другие временные файлы
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+*.log
+
+venv/

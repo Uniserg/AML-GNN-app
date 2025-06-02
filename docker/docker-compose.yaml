@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  graphaml:
+    image: uniserg/graphaml
+    environment:
+      - AML_MODEL_URL=http://gnn_model:5000
+    ports:
+      - "8080:8080"
+    networks:
+      - aml_network
+
+  gnn_model:
+    image: uniserg/gnn_model
+    ports:
+      - "5000:5000"
+    networks:
+      - aml_network
+
+networks:
+  aml_network:
+    driver: bridge
