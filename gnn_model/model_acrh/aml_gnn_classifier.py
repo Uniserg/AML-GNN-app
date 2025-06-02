@@ -4,30 +4,30 @@ from torch_geometric.nn import GINEConv, TransformerConv, TAGConv
 from torch_geometric.data import Data
 
 class AmlGnnClassifier(torch.nn.Module):
-    def __init__(self, nodes: torch.tensor, edges: torch.tensor, num_classes):
+    def __init__(self, n_nodes_features: torch.tensor, n_edges_features: torch.tensor, num_classes):
         super().__init__()
 
         # GNN-слои для узлов
         self.conv1 = GINEConv(nn=torch.nn.Sequential(
-            torch.nn.Linear(nodes.shape[1], 256),
+            torch.nn.Linear(n_nodes_features, 256),
             torch.nn.ReLU(),
             torch.nn.Linear(256, 128)
-        ), edge_dim=edges.shape[1])
+        ), edge_dim=n_edges_features)
         self.conv2 =  GINEConv(nn=torch.nn.Sequential(
             torch.nn.Linear(128, 128),
             torch.nn.ReLU(),
             torch.nn.Linear(128, 128)
-        ), edge_dim=edges.shape[1])
-        self.conv3 =  GINEConv(nn=torch.nn.Linear(128, 64), edge_dim=edges.shape[1])
+        ), edge_dim=n_edges_features)
+        self.conv3 =  GINEConv(nn=torch.nn.Linear(128, 64), edge_dim=n_edges_features)
         self.tag1 = TAGConv(64, 64, K=3)
-        self.conv4 =  GINEConv(nn=torch.nn.Linear(64, 128), edge_dim=edges.shape[1])
-        self.transformer1 = TransformerConv(128, 128, edge_dim=edges.shape[1])
-        self.conv5 =  GINEConv(nn=torch.nn.Linear(128, 64), edge_dim=edges.shape[1])
-        self.conv6 =  GINEConv(nn=torch.nn.Linear(64, 128), edge_dim=edges.shape[1])
-        self.conv7 =  GINEConv(nn=torch.nn.Linear(128, 256), edge_dim=edges.shape[1])
-        self.conv8 =  GINEConv(nn=torch.nn.Linear(256, 256), edge_dim=edges.shape[1])
-        self.transformer2 = TransformerConv(256, 256, edge_dim=edges.shape[1])
-        self.conv9 =  GINEConv(nn=torch.nn.Linear(256, 512), edge_dim=edges.shape[1])
+        self.conv4 =  GINEConv(nn=torch.nn.Linear(64, 128), edge_dim=n_edges_features)
+        self.transformer1 = TransformerConv(128, 128, edge_dim=n_edges_features)
+        self.conv5 =  GINEConv(nn=torch.nn.Linear(128, 64), edge_dim=n_edges_features)
+        self.conv6 =  GINEConv(nn=torch.nn.Linear(64, 128), edge_dim=n_edges_features)
+        self.conv7 =  GINEConv(nn=torch.nn.Linear(128, 256), edge_dim=n_edges_features)
+        self.conv8 =  GINEConv(nn=torch.nn.Linear(256, 256), edge_dim=n_edges_features)
+        self.transformer2 = TransformerConv(256, 256, edge_dim=n_edges_features)
+        self.conv9 =  GINEConv(nn=torch.nn.Linear(256, 512), edge_dim=n_edges_features)
 
         # MLP для классификации рёбер
         # Вход: эмбеддинги узлов (source + target)

@@ -12,5 +12,5 @@ class Transfer:
             source_account=json_data['sourceAccount'],
             target_account=json_data['targetAccount'],
             timestamp=json_data['timestamp'], 
-                   amount=json_data['amount'], 
-                   payment_type=['paymentType'])
+            amount=json_data['amount'], 
+            payment_type=['paymentType'])
