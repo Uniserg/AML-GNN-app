@@ -1,0 +1,98 @@
+[
+  {
+    "transactionId": 1,
+    "sourceAccount": 1,
+    "targetAccount": 2,
+    "timestamp": 1672531200,
+    "amount": 2500000,
+    "paymentType": "Wire"
+  },
+  {
+    "transactionId": 2,
+    "sourceAccount": 2,
+    "targetAccount": 4,
+    "timestamp": 1672531300,
+    "amount": 22000,
+    "paymentType": "Bitcoin"
+  },
+  {
+    "transactionId": 3,
+    "sourceAccount": 5,
+    "targetAccount": 3,
+    "timestamp": 1672531400,
+    "amount": 350000,
+    "paymentType": "ACH"
+  },
+  {
+    "transactionId": 4,
+    "sourceAccount": 4,
+    "targetAccount": 5,
+    "timestamp": 1672531500,
+    "amount": 0.5,
+    "paymentType": "Bitcoin"
+  },
+  {
+    "transactionId": 5,
+    "sourceAccount": 1,
+    "targetAccount": 3,
+    "timestamp": 1672531600,
+    "amount": 1200,
+    "paymentType": "Credit Card"
+  },
+  {
+    "transactionId": 6,
+    "sourceAccount": 3,
+    "targetAccount": 5,
+    "timestamp": 1672531700,
+    "amount": 950,
+    "paymentType": "Cash"
+  },
+  {
+    "transactionId": 7,
+    "sourceAccount": 6,
+    "targetAccount": 7,
+    "timestamp": 1672531800,
+    "amount": 8700,
+    "paymentType": "Cheque"
+  },
+  {
+    "transactionId": 8,
+    "sourceAccount": 7,
+    "targetAccount": 8,
+    "timestamp": 1672531900,
+    "amount": 125000,
+    "paymentType": "Reinvestment"
+  },
+  {
+    "transactionId": 9,
+    "sourceAccount": 8,
+    "targetAccount": 1,
+    "timestamp": 1672532000,
+    "amount": 320000,
+    "paymentType": "Wire"
+  },
+  {
+    "transactionId": 10,
+    "sourceAccount": 4,
+    "targetAccount": 6,
+    "timestamp": 1672532100,
+    "amount": 1.2,
+    "paymentType": "Bitcoin"
+  },
+  {
+    "transactionId": 11,
+    "sourceAccount": 5,
+    "targetAccount": 7,
+    "timestamp": 1672532200,
+    "amount": 45000,
+    "paymentType": "ACH"
+  },
+  {
+    "transactionId": 12,
+    "sourceAccount": 2,
+    "targetAccount": 8,
+    "timestamp": 1672532300,
+    "amount": 980,
+    "paymentType": "Credit Card"
+  }
+]
