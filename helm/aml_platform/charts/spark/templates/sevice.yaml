@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "spark.fullname" . }}-master
+spec:
+  type: ClusterIP
+  ports:
+    - name: webui
+      port: 8080
+    - name: cluster
+      port: 7077
+  selector:
+    app.kubernetes.io/name: {{ include "spark.name" . }}
+    component: master

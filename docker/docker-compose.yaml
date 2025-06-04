@@ -5,15 +5,75 @@ services:
     image: uniserg/graphaml
     environment:
       - AML_MODEL_URL=http://gnn_model:5000
+      - janusgraph.clusterHosts=janusgraph
+      - janusgraph.port=8182
+      - janusgraph.storage.backend=hbase
+      - janusgraph.storage.hostname=hbase
     ports:
       - "8080:8080"
     networks:
       - aml_network
+    depends_on:
+      - gnn_model
+      - janusgraph
 
   gnn_model:
     image: uniserg/gnn_model
     ports:
       - "5000:5000"
+    networks:
+      - aml_network
+
+  hbase:
+    image: harisekhon/hbase:latest
+    hostname: hbase
+    container_name: hbase
+    ports:
+      - "16010:16010"
+      - "16020:16020"
+      - "16030:16030"
+    networks:
+      - aml_network
+
+  janusgraph:
+    image: janusgraph/janusgraph:latest
+    ports:
+      - "8182:8182"
+    environment:
+      - janusgraph.storage.backend=hbase
+      - janusgraph.storage.hostname=hbase
+    networks:
+      - aml_network
+    depends_on:
+      - hbase
+
+  spark-master:
+    image: bitnami/spark:latest
+    ports:
+      - "8081:8080"
+      - "7077:7077"
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    networks:
+      - aml_network
+
+  spark-worker:
+    image: bitnami/spark:latest
+    depends_on:
+      - spark-master
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
     networks:
       - aml_network
 

@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: uniserg/graphaml
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+env:
+  AML_MODEL_URL: "http://gnn-model:5000"
+  janusgraph.clusterHosts: "janusgraph"
+  janusgraph.port: "8182"
+  janusgraph.storage.backend: "hbase"
+  janusgraph.storage.hostname: "hbase"
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi

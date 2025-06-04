@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "janusgraph.fullname" . }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: gremlin
+      port: 8182
+      targetPort: 8182
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ include "janusgraph.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

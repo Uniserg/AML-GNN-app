@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "spark.fullname" . }}-worker
+  labels:
+    {{- include "spark.labels" . | nindent 4 }}
+    component: worker
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "spark.selectorLabels" . | nindent 6 }}
+      component: worker
+  template:
+    metadata:
+      labels:
+        {{- include "spark.selectorLabels" . | nindent 8 }}
+        component: worker
+    spec:
+      containers:
+        - name: spark-worker
+          image: "{{ .Values.worker.image }}:{{ .Values.worker.tag }}"
+          env:
+            - name: SPARK_MASTER_URL
+              value: "spark://{{ include "spark.fullname" . }}-master:7077"
+            - name: SPARK_WORKER_MEMORY
+              value: {{ .Values.worker.env.SPARK_WORKER_MEMORY | quote }}
+            - name: SPARK_WORKER_CORES
+              value: {{ .Values.worker.env.SPARK_WORKER_CORES | quote }}
+          resources:
+            {{- toYaml .Values.worker.resources | nindent 12 }}

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: gnn-model
+description: GNN Model Service
+version: 0.1.0
+appVersion: "1.0"
